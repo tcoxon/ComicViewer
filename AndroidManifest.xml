@@ -5,14 +5,4 @@
       android:versionName="1.0">
     <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="11" />
 
-    <application android:icon="@drawable/icon" android:label="ComicViewer">
-        <activity android:name=".ComicViewerActivity"
-                  android:label="ComicViewer">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-    </application>
 </manifest>
