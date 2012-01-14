@@ -398,6 +398,9 @@ public abstract class ComicViewerActivity extends Activity {
         case R.id.MENU_GO_TO_FIRST:
             goToFirst();
             return true;
+        case R.id.MENU_WEBSITE:
+            launchWebsite();
+            return true;
         case R.id.MENU_ARCHIVE:
             showArchive();
             return true;
@@ -435,6 +438,14 @@ public abstract class ComicViewerActivity extends Activity {
         browser.setAction(Intent.ACTION_VIEW);
         browser.addCategory(Intent.CATEGORY_BROWSABLE);
         browser.setData(comicDef.getDonateUrl());
+        startActivity(browser);
+    }
+
+    public void launchWebsite() {
+        Intent browser = new Intent();
+        browser.setAction(Intent.ACTION_VIEW);
+        browser.addCategory(Intent.CATEGORY_BROWSABLE);
+        browser.setData(Uri.parse(comicInfo.getUrl()));
         startActivity(browser);
     }
 
