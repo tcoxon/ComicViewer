@@ -1,4 +1,4 @@
-package net.bytten.xkcdviewer;
+package net.bytten.comicviewer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,10 +43,16 @@ public class Utility {
         extends AsyncTask<Params, Integer, Result>
     {
         private ProgressDialog pd;
+        
+        private String title;
+        
+        public CancellableAsyncTaskWithProgressDialog(String title) {
+            this.title = title;
+        }
 
         public void start(Context cxt, String pdText, Params... params) {
             pd = ProgressDialog.show(cxt,
-                    "xkcdViewer", pdText, true, true,
+                    title, pdText, true, true,
                     new OnCancelListener() {
                 public void onCancel(DialogInterface dialog) {
                     cancel(true);

@@ -1,8 +1,9 @@
 /*
+ *  ComicViewer - Android library for viewing comics with hover text.
+ *  
  *  xkcdViewer - Android app to view xkcd comics with hover text
  *  Copyright (C) 2009-2010 Tom Coxon, Tyler Breisacher, David McCullough,
  *      Kristian Lundkvist.
- *  xkcd belongs to Randall Munroe.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +19,7 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package net.bytten.xkcdviewer;
+package net.bytten.comicviewer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -104,6 +105,8 @@ public abstract class ComicViewerActivity extends Activity {
 
     protected abstract IComicDefinition makeComicDef();
     protected abstract Class<? extends ArchiveActivity> getArchiveActivityClass();
+    protected abstract String getStringAppName();
+    protected abstract String getStringAboutText();
     
     protected void resetContent() {
         comicDef = makeComicDef();
@@ -457,7 +460,7 @@ public abstract class ComicViewerActivity extends Activity {
             return;
         }
 
-        new Utility.CancellableAsyncTaskWithProgressDialog<Uri, File>() {
+        new Utility.CancellableAsyncTaskWithProgressDialog<Uri, File>(getStringAppName()) {
             Throwable e;
 
             @Override
@@ -540,7 +543,7 @@ public abstract class ComicViewerActivity extends Activity {
         case DIALOG_SHOW_ABOUT:
             //Build and show the About dialog
             builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.app_name);
+            builder.setTitle(getStringAppName());
             builder.setIcon(android.R.drawable.ic_menu_info_details);
             builder.setNegativeButton(android.R.string.ok, null);
             builder.setNeutralButton("Donate", new DialogInterface.OnClickListener() {
@@ -550,7 +553,7 @@ public abstract class ComicViewerActivity extends Activity {
             });
             View v = LayoutInflater.from(this).inflate(R.layout.about, null);
             TextView tv = (TextView)v.findViewById(R.id.aboutText);
-            tv.setText(getString(R.string.aboutText, getVersion()));
+            tv.setText(String.format(getStringAboutText(), getVersion()));
             builder.setView(v);
             dialog = builder.create();
             builder = null;
@@ -656,7 +659,7 @@ public abstract class ComicViewerActivity extends Activity {
      */
 
     public void goToFirst() {
-        loadComic(createComicUri("1" /* TODO use comic provider */));
+        loadComic(createComicUri(provider.getFirstId()));
     }
     public void goToPrev() {
         loadComic(createComicUri(comicInfo.getPrevId()));
@@ -676,7 +679,7 @@ public abstract class ComicViewerActivity extends Activity {
         /* Can't just choose a random number and go to the comic, because if
          * the user cancelled the comic loading at start, we won't know how
          * many comics there are! */
-        new Utility.CancellableAsyncTaskWithProgressDialog<Object, Uri>() {
+        new Utility.CancellableAsyncTaskWithProgressDialog<Object, Uri>(getStringAppName()) {
 
             @Override
             protected Uri doInBackground(Object... params) {
@@ -713,7 +716,7 @@ public abstract class ComicViewerActivity extends Activity {
 
     public void loadComic(final Uri uri) {
 
-        new Utility.CancellableAsyncTaskWithProgressDialog<Object, ComicInfoOrError>() {
+        new Utility.CancellableAsyncTaskWithProgressDialog<Object, ComicInfoOrError>(getStringAppName()) {
 
             @Override
             protected ComicInfoOrError doInBackground(Object... params) {
@@ -770,7 +773,7 @@ public abstract class ComicViewerActivity extends Activity {
     public void loadComicImage(Uri uri) {
         webview.clearView();
         final ProgressDialog pd = ProgressDialog.show(
-                this, getResources().getString(R.string.app_name),
+                this, getStringAppName(),
                 "Loading comic image...", false, true,
                 new OnCancelListener() {
                     public void onCancel(DialogInterface dialog) {

@@ -1,8 +1,8 @@
-package net.bytten.xkcdviewer;
+package net.bytten.comicviewer;
 
 import android.net.Uri;
 
-interface IComicInfo {
+public interface IComicInfo {
     public Uri getImage();
     public String getTitle();
     public String getAlt();

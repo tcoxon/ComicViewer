@@ -1,9 +1,9 @@
-package net.bytten.xkcdviewer;
+package net.bytten.comicviewer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.bytten.xkcdviewer.ArchiveData.ArchiveItem;
+import net.bytten.comicviewer.ArchiveData.ArchiveItem;
 
 import android.content.Context;
 import android.database.Cursor;

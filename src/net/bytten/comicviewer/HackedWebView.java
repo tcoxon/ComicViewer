@@ -1,4 +1,4 @@
-package net.bytten.xkcdviewer;
+package net.bytten.comicviewer;
 
 import android.util.AttributeSet;
 import android.view.MotionEvent;

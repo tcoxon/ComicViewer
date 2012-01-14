@@ -1,4 +1,4 @@
-package net.bytten.xkcdviewer;
+package net.bytten.comicviewer;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -24,7 +24,7 @@ import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
-import net.bytten.xkcdviewer.ArchiveData.ArchiveItem;
+import net.bytten.comicviewer.ArchiveData.ArchiveItem;
 
 public abstract class ArchiveActivity extends ListActivity {
     static public enum LoadType { ARCHIVE, BOOKMARKS, SEARCH_TITLE };
@@ -54,7 +54,7 @@ public abstract class ArchiveActivity extends ListActivity {
 
     protected void resetContent() {
         new Utility.CancellableAsyncTaskWithProgressDialog<Object,
-        List<ArchiveItem> >()
+        List<ArchiveItem> >(getTitle().toString())
         {
             protected Throwable failReason = null;
 
@@ -115,7 +115,7 @@ public abstract class ArchiveActivity extends ListActivity {
 
     public void refresh() {
         new Utility.CancellableAsyncTaskWithProgressDialog<Object,
-            Boolean>()
+            Boolean>(getTitle().toString())
         {
             @Override
             protected Boolean doInBackground(Object... params) {
@@ -238,17 +238,21 @@ public abstract class ArchiveActivity extends ListActivity {
         }
         return archiveItems;
     }
+    
+    protected abstract String getStringBookmarks();
+    protected abstract String getStringSearchByTitle();
+    protected abstract String getStringArchive();
 
     protected void showResults(LoadType loadType, List<ArchiveItem> results) {
         switch (loadType) {
         case BOOKMARKS:
-            setTitle(R.string.app_bookmarks_label);
+            setTitle(getStringBookmarks());
             break;
         case SEARCH_TITLE:
-            setTitle(R.string.app_search_title_label);
+            setTitle(getStringSearchByTitle());
             break;
         default:
-            setTitle(R.string.app_archive_label);
+            setTitle(getStringArchive());
         }
         setListAdapter(new ArchiveAdapter(this, R.layout.archive_item_layout, results));
     }

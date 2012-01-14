@@ -1,45 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      android:installLocation="auto"
-      package="net.bytten.xkcdviewer"
-      android:versionCode="21"
-      android:versionName="3.0.2">
-      
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:anyDensity="true" android:resizeable="true"></supports-screens>
-      
-    <application
-            android:icon="@drawable/icon"
-            android:label="@string/app_name">
-        <activity android:name=".XkcdViewerActivity"
-                  android:label="@string/app_name"
-                  android:configChanges="keyboardHidden|orientation">
+      package="net.bytten.comicviewer"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="11" />
+
+    <application android:icon="@drawable/icon" android:label="ComicViewer">
+        <activity android:name=".ComicViewerActivity"
+                  android:label="ComicViewer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="xkcd.com" />
-                <data android:scheme="http" android:host="www.xkcd.com" />
-            </intent-filter>
-        </activity>
-        <activity android:label="@string/app_archive_label"
-                  android:configChanges="keyboardHidden|orientation" android:name=".XkcdArchiveActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
         </activity>
 
-    <activity
-      android:name=".SettingsActivity"
-      android:label="@string/app_prefs_label">
-    </activity>
-</application>
-    <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="11"/>
-
-</manifest> 
+    </application>
+</manifest>
