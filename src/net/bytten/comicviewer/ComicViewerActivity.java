@@ -128,7 +128,8 @@ public abstract class ComicViewerActivity extends Activity {
         webview.setClickable(true);
         webview.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                showDialog(DIALOG_SHOW_HOVER_TEXT);
+                if (!"".equals(comicInfo.getAlt()))
+                    showDialog(DIALOG_SHOW_HOVER_TEXT);
             }
         });
 
@@ -369,7 +370,8 @@ public abstract class ComicViewerActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.MENU_HOVER_TEXT:
-            showDialog(DIALOG_SHOW_HOVER_TEXT);
+            if (!"".equals(comicInfo.getAlt()))
+                showDialog(DIALOG_SHOW_HOVER_TEXT);
             return true;
         case R.id.MENU_REFRESH:
             loadComic(createComicUri(comicInfo.getId()));
@@ -808,7 +810,12 @@ public abstract class ComicViewerActivity extends Activity {
                 pd.setProgress(newProgress * 100);
             }
         });
-        webview.loadUrl(uri.toString());
+        if ("".equals(uri.toString())) {
+            failed("Couldn't identify image in post");
+            webview.loadUrl("about:blank");
+        } else {
+            webview.loadUrl(uri.toString());
+        }
     }
 
     @Override
