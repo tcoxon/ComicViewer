@@ -13,6 +13,7 @@
         <ImageView
    	       android:layout_alignParentLeft="true"
            android:id="@+id/bookmarkBtn"
+           android:background="@android:drawable/btn_star_big_off"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            />
@@ -22,31 +23,39 @@
             android:src="@drawable/ic_menu_dice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-	    <LinearLayout android:orientation="horizontal"
+	    <RelativeLayout android:orientation="horizontal"
 	        android:layout_toLeftOf="@id/randomBtn"
 	        android:layout_toRightOf="@id/bookmarkBtn"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        >
-	        <Button android:text="&lt;&lt;" android:id="@+id/firstBtn"
-	            android:layout_weight="1"
+	        <Button android:text=" « " android:id="@+id/firstBtn"
+	            android:layout_alignParentLeft="true"
 	            android:visibility="gone"
-	            android:layout_width="fill_parent" android:layout_height="wrap_content" />
-	        <Button android:text="&lt;" android:id="@+id/prevBtn"
-	            android:layout_weight="1"
-	            android:layout_width="fill_parent" android:layout_height="wrap_content" />
-	        <EditText android:hint="Comic ID" android:id="@+id/comicIdSel"
-	            android:singleLine="true"
-	            android:imeOptions="actionGo"
-	            android:layout_weight="0.5"
-	            android:layout_width="fill_parent" android:layout_height="wrap_content" />
-	        <Button android:text="&gt;" android:id="@+id/nextBtn"
-	            android:layout_weight="1"
-	            android:layout_width="fill_parent" android:layout_height="wrap_content" />
-	        <Button android:text="»" android:id="@+id/finalBtn"
-	            android:layout_weight="1"
-	            android:layout_width="fill_parent" android:layout_height="wrap_content" />
-	    </LinearLayout>
+	            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	        <Button android:text=" » " android:id="@+id/finalBtn"
+	            android:layout_alignParentRight="true"
+	            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <RelativeLayout android:orientation="horizontal"
+                android:layout_toLeftOf="@id/finalBtn"
+                android:layout_toRightOf="@id/firstBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+                <Button android:text=" &lt; " android:id="@+id/prevBtn"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <Button android:text=" &gt; " android:id="@+id/nextBtn"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <EditText android:hint="Comic ID" android:id="@+id/comicIdSel"
+                    android:layout_toLeftOf="@id/nextBtn"
+                    android:layout_toRightOf="@id/prevBtn"
+                    android:singleLine="true"
+                    android:imeOptions="actionGo"
+                    android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </RelativeLayout>
+	    </RelativeLayout>
     </RelativeLayout>
 
     <TextView android:id="@+id/title"
