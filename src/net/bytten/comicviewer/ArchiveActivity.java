@@ -104,13 +104,13 @@ public abstract class ArchiveActivity extends ListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.archive_refresh:
-            refresh();
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+        int itemId = item.getItemId();
+		if (itemId == R.id.archive_refresh) {
+			refresh();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
     }
 
     public void refresh() {
