@@ -368,60 +368,60 @@ public abstract class ComicViewerActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.MENU_HOVER_TEXT:
-            if (!"".equals(comicInfo.getAlt()))
+        int itemId = item.getItemId();
+		if (itemId == R.id.MENU_HOVER_TEXT) {
+			if (!"".equals(comicInfo.getAlt()))
                 showDialog(DIALOG_SHOW_HOVER_TEXT);
-            return true;
-        case R.id.MENU_REFRESH:
-            loadComic(createComicUri(comicInfo.getId()));
-            return true;
-        case R.id.MENU_RANDOM:
-            goToRandom();
-            return true;
-        case R.id.MENU_SHARE_LINK:
-            shareComicLink();
-            return true;
-        case R.id.MENU_SHARE_IMAGE:
-            shareComicImage();
-            return true;
-        case R.id.MENU_SETTINGS:
-            showSettings();
-            return true;
-        case R.id.MENU_GO_TO_FINAL:
-            goToFinal();
-            return true;
-        case R.id.MENU_GO_TO_NEXT:
-            goToNext();
-            return true;
-        case R.id.MENU_GO_TO_PREV:
-            goToPrev();
-            return true;
-        case R.id.MENU_GO_TO_FIRST:
-            goToFirst();
-            return true;
-        case R.id.MENU_WEBSITE:
-            launchWebsite();
-            return true;
-        case R.id.MENU_ARCHIVE:
-            showArchive();
-            return true;
-        case R.id.MENU_AUTHOR_LINK:
-            loadAuthorLink();
-            return true;
-        case R.id.MENU_DONATE:
-            donate();
-            return true;
-        case R.id.MENU_ABOUT:
-            showDialog(DIALOG_SHOW_ABOUT);
-            return true;
-        case R.id.MENU_BOOKMARKS:
-            showBookmarks();
-            return true;
-        case R.id.MENU_SEARCH_TITLE:
-            showDialog(DIALOG_SEARCH_BY_TITLE);
-            return true;
-        }
+			return true;
+		} else if (itemId == R.id.MENU_REFRESH) {
+			loadComic(createComicUri(comicInfo.getId()));
+			return true;
+		} else if (itemId == R.id.MENU_RANDOM) {
+			goToRandom();
+			return true;
+		} else if (itemId == R.id.MENU_SHARE_LINK) {
+			shareComicLink();
+			return true;
+		} else if (itemId == R.id.MENU_SHARE_IMAGE) {
+			shareComicImage();
+			return true;
+		} else if (itemId == R.id.MENU_SETTINGS) {
+			showSettings();
+			return true;
+		} else if (itemId == R.id.MENU_GO_TO_FINAL) {
+			goToFinal();
+			return true;
+		} else if (itemId == R.id.MENU_GO_TO_NEXT) {
+			goToNext();
+			return true;
+		} else if (itemId == R.id.MENU_GO_TO_PREV) {
+			goToPrev();
+			return true;
+		} else if (itemId == R.id.MENU_GO_TO_FIRST) {
+			goToFirst();
+			return true;
+		} else if (itemId == R.id.MENU_WEBSITE) {
+			launchWebsite();
+			return true;
+		} else if (itemId == R.id.MENU_ARCHIVE) {
+			showArchive();
+			return true;
+		} else if (itemId == R.id.MENU_AUTHOR_LINK) {
+			loadAuthorLink();
+			return true;
+		} else if (itemId == R.id.MENU_DONATE) {
+			donate();
+			return true;
+		} else if (itemId == R.id.MENU_ABOUT) {
+			showDialog(DIALOG_SHOW_ABOUT);
+			return true;
+		} else if (itemId == R.id.MENU_BOOKMARKS) {
+			showBookmarks();
+			return true;
+		} else if (itemId == R.id.MENU_SEARCH_TITLE) {
+			showDialog(DIALOG_SEARCH_BY_TITLE);
+			return true;
+		}
         return false;
     }
 
