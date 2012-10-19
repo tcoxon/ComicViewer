@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.bytten.comicviewer.ArchiveData.ArchiveItem;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -19,12 +20,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ListView;
 import android.widget.TextView;
-
-import net.bytten.comicviewer.ArchiveData.ArchiveItem;
+import android.widget.Toast;
 
 public abstract class ArchiveActivity extends ListActivity {
     static public enum LoadType { ARCHIVE, BOOKMARKS, SEARCH_TITLE };

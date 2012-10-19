@@ -1,9 +1,9 @@
 package net.bytten.comicviewer;
 
+import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.webkit.WebView;
-import android.content.*;
 
 public class HackedWebView extends WebView {
     public HackedWebView(Context cxt) {

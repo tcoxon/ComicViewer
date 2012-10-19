@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.bytten.comicviewer.ArchiveData.ArchiveItem;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

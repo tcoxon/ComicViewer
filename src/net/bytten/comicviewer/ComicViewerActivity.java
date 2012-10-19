@@ -24,7 +24,9 @@ package net.bytten.comicviewer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.json.JSONException;
 
@@ -32,6 +34,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
@@ -39,6 +42,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
@@ -53,6 +57,8 @@ import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -63,9 +69,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
-import android.content.Context;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 
 public abstract class ComicViewerActivity extends Activity {
 
@@ -355,6 +358,8 @@ public abstract class ComicViewerActivity extends Activity {
             .setTitle(comicDef.getAuthorLinkText());
         if (!comicDef.hasAltText())
             menu.removeItem(R.id.MENU_HOVER_TEXT);
+        if (provider.getExplainUrl(comicInfo) == null)
+            menu.removeItem(R.id.MENU_EXPLAIN);
         return true;
     }
     
@@ -373,6 +378,9 @@ public abstract class ComicViewerActivity extends Activity {
 			if (!"".equals(comicInfo.getAlt()))
                 showDialog(DIALOG_SHOW_HOVER_TEXT);
 			return true;
+		} else if (itemId == R.id.MENU_EXPLAIN) {
+		    explain();
+		    return true;
 		} else if (itemId == R.id.MENU_REFRESH) {
 			loadComic(createComicUri(comicInfo.getId()));
 			return true;
@@ -725,6 +733,39 @@ public abstract class ComicViewerActivity extends Activity {
         public Throwable e = null;
         public ComicInfoOrError(Throwable e) { this.e = e; }
         public ComicInfoOrError(IComicInfo d) { comicInfo = d; }
+    }
+    
+    public void explain() {
+        final IComicInfo comic = comicInfo;
+        new AsyncTask<Object, Integer, Integer>() {
+
+            @Override
+            protected Integer doInBackground(Object... params) {
+                try {
+                    URL url = new URL(provider.getExplainUrl(comic).toString());
+                    HttpURLConnection http = (HttpURLConnection)url.openConnection();
+                    return http.getResponseCode();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Integer result) {
+                super.onPostExecute(result);
+                if (result == null || result != 200) {
+                    toast("This comic has no user-supplied explanation.");
+                }
+                
+            }
+        }.execute(new Object[]{});
+        
+        Intent browser = new Intent();
+        browser.setAction(Intent.ACTION_VIEW);
+        browser.addCategory(Intent.CATEGORY_BROWSABLE);
+        browser.setData(provider.getExplainUrl(comic));
+        startActivity(browser);
     }
 
     public void loadComic(final Uri uri) {

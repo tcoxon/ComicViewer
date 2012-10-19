@@ -2,7 +2,9 @@ package net.bytten.comicviewer;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.*;
+import android.preference.CheckBoxPreference;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 
 public class SettingsActivity extends PreferenceActivity {
 

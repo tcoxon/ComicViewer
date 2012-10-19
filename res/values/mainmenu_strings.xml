@@ -20,4 +20,5 @@
 <string name="mainmenu_donate">Donate</string>
 <string name="mainmenu_about">About</string>
 <string name="mainmenu_debug">Debug</string>
+<string name="mainmenu_explain">Explain</string>
 </resources>
