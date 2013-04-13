@@ -5,7 +5,10 @@
     <item android:id="@+id/MENU_WEBSITE" android:title="@string/mainmenu_goto_website" android:icon="@drawable/ic_menu_star"></item>
 </menu>
     
-</item><item android:id="@+id/MENU_HOVER_TEXT" android:title="@string/mainmenu_hover_text" android:icon="@android:drawable/ic_menu_info_details"></item><item android:id="@+id/MENU_EXPLAIN" android:title="@string/mainmenu_explain" android:icon="@android:drawable/ic_menu_info_details"></item><item android:id="@+id/MENU_ARCHIVE" android:icon="@drawable/ic_menu_archive" android:title="@string/mainmenu_archive"></item><item android:id="@+id/MENU_COMIC_LIST" android:title="@string/mainmenu_comic_list" android:icon="@drawable/ic_menu_archive" android:visible="false"></item><item android:id="@+id/MENU_SHARE" android:title="@string/mainmenu_share" android:icon="@android:drawable/ic_menu_share">
+</item>
+<item android:id="@+id/MENU_HOVER_TEXT" android:title="@string/mainmenu_hover_text" android:icon="@android:drawable/ic_menu_info_details"></item>
+<item android:id="@+id/MENU_COMIC_LINK" android:title="@string/mainmenu_comic_link" android:icon="@android:drawable/ic_menu_info_details"></item>
+<item android:id="@+id/MENU_EXPLAIN" android:title="@string/mainmenu_explain" android:icon="@android:drawable/ic_menu_info_details"></item><item android:id="@+id/MENU_ARCHIVE" android:icon="@drawable/ic_menu_archive" android:title="@string/mainmenu_archive"></item><item android:id="@+id/MENU_COMIC_LIST" android:title="@string/mainmenu_comic_list" android:icon="@drawable/ic_menu_archive" android:visible="false"></item><item android:id="@+id/MENU_SHARE" android:title="@string/mainmenu_share" android:icon="@android:drawable/ic_menu_share">
 <menu><item android:id="@+id/MENU_SHARE_LINK" android:title="@string/mainmenu_share_link" android:icon="@android:drawable/ic_menu_share"></item><item android:id="@+id/MENU_SHARE_IMAGE" android:title="@string/mainmenu_share_image" android:icon="@android:drawable/ic_menu_gallery"></item>
 
 </menu>

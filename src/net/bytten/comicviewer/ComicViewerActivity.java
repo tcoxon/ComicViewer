@@ -349,17 +349,28 @@ public abstract class ComicViewerActivity extends Activity {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    private void longToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainmenu, menu);
         menu.findItem(R.id.MENU_AUTHOR_LINK)
             .setTitle(comicDef.getAuthorLinkText());
-        if (!comicDef.hasAltText())
-            menu.removeItem(R.id.MENU_HOVER_TEXT);
-        if (provider.getExplainUrl(comicInfo) == null)
-            menu.removeItem(R.id.MENU_EXPLAIN);
+        return true;
+    }
+    
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.MENU_HOVER_TEXT).
+                setVisible(comicDef.hasAltText());
+        menu.findItem(R.id.MENU_COMIC_LINK).
+                setVisible(comicInfo.getLink() != null);
+        menu.findItem(R.id.MENU_EXPLAIN).
+                setVisible(provider.getExplainUrl(comicInfo) != null);
         return true;
     }
     
@@ -378,6 +389,10 @@ public abstract class ComicViewerActivity extends Activity {
 			if (!"".equals(comicInfo.getAlt()))
                 showDialog(DIALOG_SHOW_HOVER_TEXT);
 			return true;
+		} else if (itemId == R.id.MENU_COMIC_LINK) {
+		    if (comicInfo.getLink() != null)
+		        openComicLink();
+		    return true;
 		} else if (itemId == R.id.MENU_EXPLAIN) {
 		    explain();
 		    return true;
@@ -456,6 +471,14 @@ public abstract class ComicViewerActivity extends Activity {
         browser.setAction(Intent.ACTION_VIEW);
         browser.addCategory(Intent.CATEGORY_BROWSABLE);
         browser.setData(Uri.parse(comicInfo.getUrl()));
+        startActivity(browser);
+    }
+    
+    public void openComicLink() {
+        Intent browser = new Intent();
+        browser.setAction(Intent.ACTION_VIEW);
+        browser.addCategory(Intent.CATEGORY_BROWSABLE);
+        browser.setData(comicInfo.getLink());
         startActivity(browser);
     }
 
@@ -792,6 +815,11 @@ public abstract class ComicViewerActivity extends Activity {
                     setLastReadComic(comicInfo.getId());
 
                     loadComicImage(comicInfo.getImage());
+                    
+                    if (comicInfo.getLink() != null) {
+                        longToast("This comic has a link or larger image attached.\n"+
+                            "Select 'Open Link' from the menu to see it.");
+                    }
                 } else {
                     result.e.printStackTrace();
                     /* Syntaxhack pattern match against type of result.e: */

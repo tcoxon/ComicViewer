@@ -6,6 +6,7 @@ public interface IComicInfo {
     public Uri getImage();
     public String getTitle();
     public String getAlt();
+    public Uri getLink();
     public String getId();
     public boolean isBookmarked();
     public void setBookmarked(boolean b);
