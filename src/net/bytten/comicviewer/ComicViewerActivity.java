@@ -562,7 +562,7 @@ public abstract class ComicViewerActivity extends Activity {
             }
         });
     }
-
+    
     @Override
     protected Dialog onCreateDialog(int id) {
         // Set up variables for a dialog and a dialog builder. Only need one of each.
@@ -576,11 +576,12 @@ public abstract class ComicViewerActivity extends Activity {
             //Build and show the Hover Text dialog
             builder = new AlertDialog.Builder(ComicViewerActivity.this);
             builder.setMessage(comicInfo.getAlt());
-            builder.setNeutralButton("Close", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Open Link...", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                    openComicLink();
                 }
             });
+            builder.setNegativeButton("Close", null);
             dialog = builder.create();
             builder = null;
             break;
@@ -671,6 +672,10 @@ public abstract class ComicViewerActivity extends Activity {
             //Get an alertdialog so we can edit it.
             AlertDialog adh = (AlertDialog) dialog;
             adh.setMessage(comicInfo.getAlt());
+            
+            adh.getButton(AlertDialog.BUTTON_POSITIVE).setVisibility(
+                    comicInfo.getLink() != null ? Button.VISIBLE : Button.GONE);
+            
             break;
         case DIALOG_FAILED:
             //Get the alertdialog for the failedDialog
@@ -818,7 +823,7 @@ public abstract class ComicViewerActivity extends Activity {
                     
                     if (comicInfo.getLink() != null) {
                         longToast("This comic has a link or larger image attached.\n"+
-                            "Select 'Open Link' from the menu to see it.");
+                            "Tap the image and select 'Open Link' to see it.");
                     }
                 } else {
                     result.e.printStackTrace();
