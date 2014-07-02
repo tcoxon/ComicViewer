@@ -276,7 +276,10 @@ public abstract class ComicViewerActivity extends Activity {
         resetContent();
 
         final Intent i = this.getIntent();
-        if (i.hasCategory(Intent.CATEGORY_BROWSABLE)) {
+        // Decide if application is called from launcher or from other application
+        // by using action. If you use category it can be null, that is the case
+        // with gmail application and link from that application.
+        if (Intent.ACTION_VIEW.equals(i.getAction())) {
             // Link to comic
             boolean tryArchive = true;
             if (comicDef.isComicUrl(i.getData())) {
