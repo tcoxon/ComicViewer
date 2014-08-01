@@ -2,8 +2,8 @@
  *  ComicViewer - Android library for viewing comics with hover text.
  *  
  *  xkcdViewer - Android app to view xkcd comics with hover text
- *  Copyright (C) 2009-2012 Tom Coxon, Tyler Breisacher, David McCullough,
- *      Kristian Lundkvist.
+ *  Copyright (C) 2009-2014 Tom Coxon, Tyler Breisacher, David McCullough,
+ *      Kristian Lundkvist, Ivan Vasiljević.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
